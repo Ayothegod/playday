@@ -1,6 +1,6 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import express, { Response } from "express";
+import express, { Response, Request } from "express";
 import { ApiResponse } from "./core/middlewares/ApiResponse.js";
 import { asyncHandler } from "./core/middlewares/asyncHandler.js";
 import { errorHandler } from "./core/middlewares/error.middleware.js";
@@ -22,10 +22,12 @@ app.use(express.json({ limit: "1mb" }));
 
 app.get(
   "/api/v1/test",
-  asyncHandler(async (res: Response) => {
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "OK", "/ route working successfully"));
+  asyncHandler(async (req: Request, res: Response) => {
+    return (
+      res
+        // .status(200)
+        .json(new ApiResponse(200, "OK", "/ route working successfully"))
+    );
   }),
 );
 
