@@ -26,7 +26,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@playday/types": ["../../packages/types/src"]
+      "@playday/types": ["../../packages/types/src"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]
