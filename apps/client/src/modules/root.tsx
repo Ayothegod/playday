@@ -1,10 +1,11 @@
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
-// import { SportsIcon } from '@/shared/components/SportIcon'
 import { ArrowRight, Users, MapPin, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function RootPage() {
+  const year = new Date().getFullYear();
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       {/* Header/Nav */}
@@ -15,13 +16,15 @@ export default function RootPage() {
             <span className="font-bold text-lg">Playday</span>
           </div>
           <div className="flex items-center gap-3">
-            <Link to="/signin">
-              <Button variant="ghost" size="sm">
+            <Link to="/auth/login">
+              <Button variant="ghost" size="sm" className="cursor-pointer">
                 Sign In
               </Button>
             </Link>
-            <Link to="/signup">
-              <Button size="sm">Get Started</Button>
+            <Link to="/auth/register">
+              <Button size="sm" className="cursor-pointer">
+                Get Started
+              </Button>
             </Link>
           </div>
         </div>
@@ -43,13 +46,13 @@ export default function RootPage() {
               availability, and play together. No more group chats.
             </p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Link to="/signup">
-                <Button size="lg" className="gap-2">
+              <Link to="/auth/register">
+                <Button size="lg" className="gap-2 cursor-pointer">
                   Start Playing
                   <ArrowRight size={18} />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="cursor-pointer">
                 Learn More
               </Button>
             </div>
@@ -274,8 +277,8 @@ export default function RootPage() {
             Join Playday today and never have a boring sports schedule again.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
-            <Link to="/signup">
-              <Button size="lg" className="gap-2">
+            <Link to="/auth/register">
+              <Button size="lg" className="gap-2 cursor-pointer">
                 Get Started Free
                 <ArrowRight size={18} />
               </Button>
@@ -287,7 +290,7 @@ export default function RootPage() {
       {/* Footer */}
       <footer className="bg-card/50 border-t border-border/50 py-8">
         <div className="max-w-6xl mx-auto px-4 md:px-6 text-center text-sm text-muted-foreground">
-          <p>© 2024 Playday. Find your next game.</p>
+          <p>© {year} Playday. Find your next game.</p>
         </div>
       </footer>
     </main>

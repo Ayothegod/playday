@@ -1,4 +1,5 @@
-"use client";
+// list of upcoming sessions
+// filter by sport
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

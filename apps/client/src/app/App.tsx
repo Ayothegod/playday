@@ -15,7 +15,6 @@ const router = createBrowserRouter([
         element: <RootPage />,
       },
       {
-        // element: <AuthLayout />,
         children: [
           {
             path: "/auth/login",
@@ -25,11 +24,15 @@ const router = createBrowserRouter([
           },
         ],
       },
+      // {
+      // path: "/dashboard",
+      // element: </>
+      // }
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
-  },
-  {
-    path: "*",
-    element: <NotFoundPage />,
   },
 ]);
 
