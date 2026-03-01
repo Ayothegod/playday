@@ -4,7 +4,9 @@ import express, { Response, Request } from "express";
 import { ApiResponse } from "./core/middlewares/ApiResponse.js";
 import { asyncHandler } from "./core/middlewares/asyncHandler.js";
 import { errorHandler } from "./core/middlewares/error.middleware.js";
-import auth from "./modules/auth/auth.routes.js";
+import authRoute from "./modules/auth/auth.routes.js";
+import { toNodeHandler } from "better-auth/node";
+import auth from "./core/config/auth.js";
 
 const app = express();
 // app.use(cookieParser());
@@ -16,6 +18,8 @@ app.use(
     credentials: true,
   }),
 );
+
+app.all("/api/auth/{*any}", toNodeHandler(auth));
 
 // job.start()
 app.use(express.json({ limit: "1mb" }));
@@ -31,7 +35,7 @@ app.get(
   }),
 );
 
-app.use("/api/v1/auth", auth);
+app.use("/api/v1/auth", authRoute);
 
 app.use(errorHandler as any);
 
