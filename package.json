@@ -1,0 +1,22 @@
+{
+  "name": "payday",
+  "version": "1.0.0",
+  "description": "A hyper-local sports coordination app for Bayelsa sports complex.",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "pnpm --filter apps/client run dev",
+    "dev:backend": "pnpm --filter apps/server run dev",
+    "dev": "concurrently \"pnpm --filter client run dev\" \"pnpm --filter server run dev\""
+  },
+  "keywords": [],
+  "author": "Ayothegod",
+  "license": "ISC",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
