@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id          String @id
+  name        String
+  sports      String // sports they play - JSON.stringify([])
+  skillLevel  String @default("begineer") // begineer, intermediate, advanced
+  availablity String // morning, afternoon, evening
+  // status Stri
+  avatar      String
+}
+
+// model Session {}
+
+// sessions
+
+// id
+
+// sport
+
+// location
+
+// date
+
+// max_players
+
+// created_by
+
+// created_at
+
+// session_participants
+
+// id
+
+// session_id
+
+// user_id
