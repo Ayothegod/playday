@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "moduleDetection": "force",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "src/shared/@types"],
+  "exclude": ["node_modules"]
+}
