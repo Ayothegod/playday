@@ -11,6 +11,9 @@ importers:
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
 
   apps/client:
     dependencies:
@@ -57,6 +60,8 @@ importers:
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@24.11.0)
+
+  packages/types: {}
 
 packages:
 

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "emitDeclarationOnly": false,
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "composite": true
+  },
+  "include": ["src"]
+}
