@@ -1,16 +1,13 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { TopBar } from "@/components/top-bar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { SportsIcon } from "@/components/sports-icon";
-import { getUserFromStorage } from "@/lib/mock-data";
-import { ChevronDown } from "lucide-react";
+import { SportsIcon } from "@/shared/components/SportIcon";
+import { TopBar } from "@/shared/components/TopBar";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
+import { Textarea } from "@/shared/components/ui/textarea";
+import { getUserFromStorage } from "@/shared/lib/mockData";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Sport =
   | "basketball"
@@ -34,11 +31,11 @@ const sports: Sport[] = [
 const skillLevels: SkillLevel[] = ["beginner", "intermediate", "advanced"];
 
 export default function CreateSessionPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  // const [user, setUser] = useState<{ name: string; email: string } | null>(
+  //   null,
+  // );
+  const [loading] = useState(true);
 
   const [formData, setFormData] = useState({
     sport: "basketball" as Sport,
@@ -56,17 +53,14 @@ export default function CreateSessionPage() {
   useEffect(() => {
     const userData = getUserFromStorage();
     if (!userData) {
-      router.push("/signin");
+      navigate("/signin");
       return;
     }
-    setUser(userData);
-    setLoading(false);
-  }, [router]);
+    // setUser(userData);
+    // setLoading(false);
+  }, [navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validate
+  const handleSubmit = async () => {
     if (
       !formData.title ||
       !formData.location ||
@@ -82,13 +76,17 @@ export default function CreateSessionPage() {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Redirect to dashboard
-    router.push("/dashboard");
+    navigate("/dashboard");
   };
 
   if (loading) {
     return (
       <main className="bg-background min-h-screen">
-        <TopBar title="Loading..." showBack onBackClick={() => router.back()} />
+        <TopBar
+          title="Loading..."
+          showBack
+          // onBackClick={() => router.back()}
+        />
       </main>
     );
   }
@@ -100,7 +98,7 @@ export default function CreateSessionPage() {
         title="Create Game"
         subtitle="Share your game with the community"
         showBack
-        onBackClick={() => router.back()}
+        // onBackClick={() => router.back()}
       />
 
       {/* Main Content */}
@@ -267,7 +265,7 @@ export default function CreateSessionPage() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => router.back()}
+              // onClick={() => router.back()}
               className="flex-1"
               disabled={submitted}
             >

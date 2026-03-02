@@ -1,33 +1,35 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { TopBar } from "@/components/top-bar";
-import { SessionCard, SessionData } from "@/components/session-card";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { userSessions, getUserFromStorage } from "@/lib/mock-data";
-import { ArrowLeft, Calendar, X } from "lucide-react";
+import { SessionCard, type SessionData } from "@/shared/components/SessionCard";
+import { TopBar } from "@/shared/components/TopBar";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
+import { getUserFromStorage, userSessions } from "@/shared/lib/mockData";
+import { Calendar } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function MySessionsPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
+  const router = useNavigate();
+  // const [user, setUser] = useState<{ name: string; email: string } | null>(
+  //   null,
+  // );
+  const [loading] = useState(true);
   const [activeTab, setActiveTab] = useState("upcoming");
 
   useEffect(() => {
     const userData = getUserFromStorage();
     if (!userData) {
-      router.push("/signin");
+      router("/signin");
       return;
     }
-    setUser(userData);
-    setLoading(false);
+    // setUser(userData);
+    // setLoading(false);
   }, [router]);
 
   const upcomingSessions = userSessions.filter(
@@ -38,13 +40,17 @@ export default function MySessionsPage() {
   );
 
   const handleSessionClick = (session: SessionData) => {
-    router.push(`/session/${session.id}`);
+    router(`/session/${session.id}`);
   };
 
   if (loading) {
     return (
       <main className="bg-background min-h-screen">
-        <TopBar title="Loading..." showBack onBackClick={() => router.back()} />
+        <TopBar
+          title="Loading..."
+          showBack
+          // onBackClick={() => router.back()}
+        />
       </main>
     );
   }
@@ -56,7 +62,7 @@ export default function MySessionsPage() {
         title="My Sessions"
         subtitle={`${upcomingSessions.length} upcoming games`}
         showBack
-        onBackClick={() => router.push("/dashboard")}
+        // onBackClick={() => router.push("/dashboard")}
       />
 
       {/* Main Content */}
@@ -102,7 +108,7 @@ export default function MySessionsPage() {
                 <p className="text-muted-foreground mb-6">
                   Find and join sessions to get started playing
                 </p>
-                <Link href="/dashboard">
+                <Link to="/dashboard">
                   <Button>Browse Sessions</Button>
                 </Link>
               </Card>

@@ -11,7 +11,6 @@ export default function RegisterPage() {
       callbackURL: `${clientEnv.VITE_FRONTEND_URL}/dashboard`,
       errorCallbackURL: `${clientEnv.VITE_FRONTEND_URL}/auth/login`,
       newUserCallbackURL: `${clientEnv.VITE_FRONTEND_URL}/welcome`,
-      // disableRedirect: true,
     });
   };
 

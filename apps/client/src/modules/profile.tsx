@@ -1,25 +1,22 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { TopBar } from "@/components/top-bar";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { getUserFromStorage } from "@/lib/mock-data";
+import { TopBar } from "@/shared/components/TopBar";
+import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
+import { Textarea } from "@/shared/components/ui/textarea";
+import { getUserFromStorage } from "@/shared/lib/mockData";
 import { Edit2, LogOut, Star } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
-  const router = useRouter();
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
+  const router = useNavigate();
+  // const [user, setUser] = useState<{ name: string; email: string } | null>(
+  //   null,
+  // );
+  const [loading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -33,21 +30,21 @@ export default function ProfilePage() {
   useEffect(() => {
     const userData = getUserFromStorage();
     if (!userData) {
-      router.push("/signin");
+      router("/signin");
       return;
     }
-    setUser(userData);
-    setFormData({
-      ...formData,
-      name: userData.name,
-      email: userData.email,
-    });
-    setLoading(false);
+    // setUser(userData);
+    // setFormData({
+    //   ...formData,
+    //   name: userData.name,
+    //   email: userData.email,
+    // });
+    // setLoading(false);
   }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    router.push("/");
+    router("/");
   };
 
   const handleSave = () => {
@@ -55,14 +52,18 @@ export default function ProfilePage() {
       "user",
       JSON.stringify({ name: formData.name, email: formData.email }),
     );
-    setUser({ name: formData.name, email: formData.email });
+    // setUser({ name: formData.name, email: formData.email });
     setIsEditing(false);
   };
 
   if (loading) {
     return (
       <main className="bg-background min-h-screen">
-        <TopBar title="Loading..." showBack onBackClick={() => router.back()} />
+        <TopBar
+          title="Loading..."
+          showBack
+          // onBackClick={() => router.back()}
+        />
       </main>
     );
   }
@@ -83,7 +84,7 @@ export default function ProfilePage() {
       <TopBar
         title="Profile"
         showBack
-        onBackClick={() => router.push("/dashboard")}
+        onBackClick={() => router("/dashboard")}
       />
 
       {/* Main Content */}

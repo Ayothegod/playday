@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   if (socialError) {
     toast.error("Google sign-in failed.");
-    // setSocialError(null, { history: "replace" });
+    setSocialError(null, { history: "replace" });
   }
 
   const handleSignIn = async () => {

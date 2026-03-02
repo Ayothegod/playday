@@ -1,46 +1,41 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
-import Link from "next/link";
-import { TopBar } from "@/components/top-bar";
-import { SportsIcon } from "@/components/sports-icon";
-import { SpotIndicator } from "@/components/spot-indicator";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { mockSessions, getUserFromStorage } from "@/lib/mock-data";
-import { SessionData } from "@/components/session-card";
-import { MapPin, Clock, Users, Share2, MessageCircle } from "lucide-react";
+import { type SessionData } from "@/shared/components/SessionCard";
+import { SportsIcon } from "@/shared/components/SportIcon";
+import { SpotIndicator } from "@/shared/components/SpotIndicator";
+import { TopBar } from "@/shared/components/TopBar";
+import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { getUserFromStorage, mockSessions } from "@/shared/lib/mockData";
+import { Clock, MapPin, MessageCircle, Share2, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function SessionDetailPage() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const params = useParams();
   const sessionId = params.id as string;
   const [session, setSession] = useState<SessionData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(true);
   const [isJoined, setIsJoined] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null,
-  );
+  const [user] = useState<{ name: string; email: string } | null>(null);
 
   useEffect(() => {
     const userData = getUserFromStorage();
     if (!userData) {
-      router.push("/signin");
+      navigate("/signin");
       return;
     }
-    setUser(userData);
+    // setUser(userData);
 
     // Find session
     const foundSession = mockSessions.find((s) => s.id === sessionId);
     if (foundSession) {
-      setSession(foundSession);
-      setIsJoined(Math.random() > 0.5); // Random for demo
+      // setSession(foundSession);
+      // setIsJoined(Math.random() > 0.5); // Random for demo
     }
-    setLoading(false);
-  }, [sessionId, router]);
+    // setLoading(false);
+  }, [sessionId, navigate]);
 
   const handleJoin = () => {
     if (session) {
@@ -67,7 +62,11 @@ export default function SessionDetailPage() {
   if (loading) {
     return (
       <main className="bg-background min-h-screen">
-        <TopBar title="Loading..." showBack onBackClick={() => router.back()} />
+        <TopBar
+          title="Loading..."
+          showBack
+          // onBackClick={() => router.back()}
+        />
       </main>
     );
   }
@@ -78,14 +77,14 @@ export default function SessionDetailPage() {
         <TopBar
           title="Session Not Found"
           showBack
-          onBackClick={() => router.back()}
+          // onBackClick={() => router.back()}
         />
         <div className="max-w-4xl mx-auto px-4 py-8">
           <Card className="bg-card border-border/50 p-8 text-center">
             <h2 className="text-2xl font-bold text-foreground mb-4">
               Session not found
             </h2>
-            <Link href="/dashboard">
+            <Link to="/dashboard">
               <Button>Back to Dashboard</Button>
             </Link>
           </Card>
@@ -102,7 +101,7 @@ export default function SessionDetailPage() {
       <TopBar
         title={session.title}
         showBack
-        onBackClick={() => router.back()}
+        // onBackClick={() => router.back()}
       />
 
       {/* Main Content */}
@@ -260,7 +259,7 @@ export default function SessionDetailPage() {
             <>
               <Button
                 variant="outline"
-                onClick={() => router.push("/dashboard")}
+                // onClick={() => router.push("/dashboard")}
                 className="flex-1"
               >
                 Back
