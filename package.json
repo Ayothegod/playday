@@ -8,7 +8,16 @@
     "dev:backend": "pnpm --filter apps/server run dev",
     "dev": "concurrently \"pnpm --filter client run dev\" \"pnpm --filter server run dev\""
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "typescript",
+    "rest",
+    "api",
+    "restapi",
+    "node",
+    "nodejs",
+    "crud"
+  ],
   "author": "Ayothegod",
   "license": "ISC",
   "pnpm": {

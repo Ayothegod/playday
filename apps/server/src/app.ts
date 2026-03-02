@@ -19,7 +19,7 @@ app.use(
   }),
 );
 
-app.all("/api/auth/{*any}", toNodeHandler(auth));
+app.all("/api/auth/*", toNodeHandler(auth));
 
 // job.start()
 app.use(express.json({ limit: "1mb" }));
@@ -27,11 +27,9 @@ app.use(express.json({ limit: "1mb" }));
 app.get(
   "/api/v1/test",
   asyncHandler(async (req: Request, res: Response) => {
-    return (
-      res
-        // .status(200)
-        .json(new ApiResponse(200, "OK", "/ route working successfully"))
-    );
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "OK", "/ route working successfully"));
   }),
 );
 

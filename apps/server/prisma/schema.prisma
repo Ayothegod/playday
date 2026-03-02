@@ -11,37 +11,49 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String              @id @default(cuid())
   name          String
   sports        String // sports they play - JSON.stringify([])
-  skillLevel    String    @default("begineer") // begineer, intermediate, advanced
-  availablity   String // morning, afternoon, evening
+  skillLevel    String?             @default("begineer") // begineer, intermediate, advanced
+  availablity   String? // morning, afternoon, evening
   // status Stri
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean             @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
   sessions      Session[]
   accounts      Account[]
+  events        EventParticipants[]
 
   @@unique([email])
   @@map("user")
 }
 
-// sessions
-// id
-// sport
-// location
-// date
-// max_players
-// created_by
-// created_at
+model Event {
+  id           String              @id @default(nanoid())
+  sport        String // football,  basketball, boxing, kickboxing, running, genaral fitness, governors progressive walk
+  location     String
+  date         DateTime
+  max_players  Int                 @default(1)
+  createdBy    String
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  participants EventParticipants[]
+}
 
-// session_participants
-// id
-// session_id
-// user_id
+model EventParticipants {
+  eventId  String
+  userId   String
+  joinedAt DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, userId])
+  @@index([userId])
+  @@index([eventId])
+}
 
 model Session {
   id        String   @id

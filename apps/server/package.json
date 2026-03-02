@@ -10,7 +10,7 @@
     "dev": "tsx watch src/index.ts",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
-    "studio": "prisma studio --allow-build=better-sqlite3",
+    "studio": "prisma studio",
     "seed": "prisma seed.ts"
   },
   "devDependencies": {

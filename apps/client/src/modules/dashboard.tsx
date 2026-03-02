@@ -1,22 +1,17 @@
-// list of upcoming sessions
-// filter by sport
-
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { SessionCard, SessionData } from "@/components/session-card";
-import { TopBar } from "@/components/top-bar";
-import { FloatingActionButton } from "@/components/floating-action-button";
-import { Button } from "@/components/ui/button";
+import { SessionCard, type SessionData } from "@/shared/components/SessionCard";
+import { TopBar } from "@/shared/components/TopBar";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { mockSessions, getUserFromStorage } from "@/lib/mock-data";
-import { Plus, Filter, LogOut, User, Zap } from "lucide-react";
+} from "@/shared/components/ui/dropdown-menu";
+// import { getUserFromStorage, mockSessions } from "@/shared/lib/mockData";
+import { Filter, LogOut, Plus, User, Zap } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 type SportFilter =
   | "all"
@@ -29,43 +24,41 @@ type SportFilter =
   | "soccer";
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [user] = useState<{ name: string; email: string } | null>(null);
+  const [loading] = useState(true);
   const [selectedSport, setSelectedSport] = useState<SportFilter>("all");
-  const [filteredSessions, setFilteredSessions] = useState<SessionData[]>([]);
+  const [filteredSessions] = useState<SessionData[]>([]);
 
-  useEffect(() => {
-    // Check authentication
-    const userData = getUserFromStorage();
-    if (!userData) {
-      router.push("/signin");
-      return;
-    }
-    setUser(userData);
-    setLoading(false);
-  }, [router]);
+  // useEffect(() => {
+  //   // Check authentication
+  //   const userData = getUserFromStorage();
+  //   if (!userData) {
+  //     router.push("/signin");
+  //     return;
+  //   }
+  //   setUser(userData);
+  //   setLoading(false);
+  // }, [router]);
 
-  useEffect(() => {
-    // Filter sessions based on selected sport
-    if (selectedSport === "all") {
-      setFilteredSessions(mockSessions);
-    } else {
-      setFilteredSessions(
-        mockSessions.filter((session) => session.sport === selectedSport),
-      );
-    }
-  }, [selectedSport]);
+  // useEffect(() => {
+  //   // Filter sessions based on selected sport
+  //   if (selectedSport === "all") {
+  //     setFilteredSessions(mockSessions);
+  //   } else {
+  //     setFilteredSessions(
+  //       mockSessions.filter((session) => session.sport === selectedSport),
+  //     );
+  //   }
+  // }, [selectedSport]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    router.push("/");
+    navigate("/");
   };
 
   const handleSessionClick = (session: SessionData) => {
-    router.push(`/session/${session.id}`);
+    navigate(`/session/${session.id}`);
   };
 
   const sports: { value: SportFilter; label: string }[] = [
@@ -106,13 +99,13 @@ export default function DashboardPage() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem asChild>
-                <Link href="/profile" className="cursor-pointer">
+                <Link to="/profile" className="cursor-pointer">
                   <User size={16} className="mr-2" />
                   Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/my-sessions" className="cursor-pointer">
+                <Link to="/my-sessions" className="cursor-pointer">
                   <Zap size={16} className="mr-2" />
                   My Sessions
                 </Link>
@@ -195,7 +188,7 @@ export default function DashboardPage() {
             <p className="text-muted-foreground mb-6">
               Try a different filter or create your own session
             </p>
-            <Link href="/create-session">
+            <Link to="/create-session">
               <Button>
                 <Plus size={18} className="mr-2" />
                 Create Session
@@ -206,12 +199,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Floating Action Button */}
-      <Link href="/create-session">
-        <FloatingActionButton
-          icon={<Plus size={24} />}
-          label="New Game"
-          onClick={() => {}}
-        />
+      <Link to="/create-session">
+        <Button size={"icon-lg"} className="cursor-pointer">
+          <Plus size={24} />
+          New Game
+        </Button>
       </Link>
     </main>
   );

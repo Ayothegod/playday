@@ -1,9 +1,11 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./layout";
-import ErrorPage from "./error";
-import NotFoundPage from "./not-found";
+import LoginPage from "@/modules/auth/login";
+import RegisterPage from "@/modules/auth/register";
+import DashboardPage from "@/modules/dashboard";
 import RootPage from "@/modules/root";
-import { Toaster } from "@/shared/components/ui/sonner";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./error";
+import Layout from "./layout";
+import NotFoundPage from "./not-found";
 
 const router = createBrowserRouter([
   {
@@ -18,16 +20,18 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/auth/login",
+            element: <LoginPage />,
           },
           {
             path: "/auth/register",
+            element: <RegisterPage />,
           },
         ],
       },
-      // {
-      // path: "/dashboard",
-      // element: </>
-      // }
+      {
+        path: "/dashboard",
+        element: <DashboardPage />,
+      },
       {
         path: "*",
         element: <NotFoundPage />,
@@ -40,7 +44,6 @@ export default function App() {
   return (
     <div>
       <RouterProvider router={router} />
-      <Toaster />
     </div>
   );
 }
