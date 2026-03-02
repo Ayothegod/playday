@@ -29,7 +29,7 @@ export default function LoginPage() {
         newUserCallbackURL: `${clientEnv.VITE_FRONTEND_URL}/welcome`,
       });
     } catch {
-      toast.error("Sorry, an erro roccured.");
+      toast.error("Sorry, an error occured.");
     } finally {
       setLoading(!loading);
     }
