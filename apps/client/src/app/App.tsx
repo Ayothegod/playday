@@ -8,6 +8,9 @@ import Layout from "./layout";
 import NotFoundPage from "./not-found";
 import TermsPage from "@/modules/services/terms";
 import PrivacyPage from "@/modules/services/privacy";
+import ProtectedRoute from "./protectedRoute";
+import EventLayout from "@/shared/layouts/EventLayout";
+import WelcomePage from "@/modules/user/welcome";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +42,25 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/dashboard",
-        element: <DashboardPage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
+        element: (
+          <ProtectedRoute>
+            <EventLayout />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            path: "/welcome",
+            element: <WelcomePage />,
+          },
+          {
+            path: "/dashboard",
+            element: <DashboardPage />,
+          },
+          {
+            path: "*",
+            element: <NotFoundPage />,
+          },
+        ],
       },
     ],
   },
