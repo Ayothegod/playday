@@ -1,13 +1,19 @@
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { parseAsString, useQueryState } from "nuqs";
 import { Link } from "react-router-dom";
 
 export default function TermsPage() {
+  const [fromLocation] = useQueryState(
+    "from",
+    parseAsString.withDefault("/auth/login"),
+  );
+
   return (
     <main className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <Link to="/">
+        <Link to="/auth/login">
           <Button variant="ghost" size="sm" className="mb-8 gap-2">
             <ArrowLeft size={18} />
             Back
