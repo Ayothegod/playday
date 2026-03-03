@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error";
 import Layout from "./layout";
 import NotFoundPage from "./not-found";
+import TermsPage from "@/modules/services/terms";
+import PrivacyPage from "@/modules/services/privacy";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <RootPage />,
+      },
+      {
+        path: "/terms",
+        element: <TermsPage />,
+      },
+      {
+        path: "/privacy",
+        element: <PrivacyPage />,
       },
       {
         children: [
