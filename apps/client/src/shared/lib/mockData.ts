@@ -1,4 +1,4 @@
-import type { SessionData } from "../components/SessionCard";
+import { type SessionData } from "../components/SessionCard";
 
 export const mockSessions: SessionData[] = [
   {
@@ -147,6 +147,121 @@ export const userSessions: SessionData[] = [
   mockSessions[1],
   mockSessions[3],
 ];
+
+export const achievements = [
+  {
+    id: "first-game",
+    name: "Game On",
+    description: "Attended your first game",
+    icon: "🎮",
+    unlocked: true,
+  },
+  {
+    id: "streak-5",
+    name: "On Fire",
+    description: "Attended 5 games in a row",
+    icon: "🔥",
+    unlocked: true,
+  },
+  {
+    id: "social-butterfly",
+    name: "Social Butterfly",
+    description: "Made 10 friends",
+    icon: "🦋",
+    unlocked: false,
+  },
+  {
+    id: "level-10",
+    name: "Rising Star",
+    description: "Reached level 10",
+    icon: "⭐",
+    unlocked: true,
+  },
+  {
+    id: "perfect-attendance",
+    name: "Never Miss",
+    description: "Never cancelled or no-showed",
+    icon: "✨",
+    unlocked: false,
+  },
+  {
+    id: "skill-master",
+    name: "Skill Master",
+    description: "Reached advanced skill level in 3 sports",
+    icon: "🏆",
+    unlocked: false,
+  },
+];
+
+export const mockUsers = {
+  "demo@playday.com": {
+    id: "user-1",
+    email: "demo@playday.com",
+    name: "You",
+    avatar: "👤",
+    level: 12,
+    xp: 4200,
+    skillLevel: "intermediate",
+    sports: ["basketball", "tennis", "badminton"],
+    gamesPlayed: 24,
+    bio: "Love playing basketball and tennis on weekends!",
+    joinDate: "Jan 2024",
+    rating: 4.8,
+    stats: {
+      basketball: { level: "intermediate", gamesPlayed: 15 },
+      tennis: { level: "beginner", gamesPlayed: 6 },
+      badminton: { level: "intermediate", gamesPlayed: 3 },
+    },
+    achievements: achievements.slice(0, 4),
+  },
+};
+
+export const mockFriends = [
+  {
+    id: "friend-1",
+    name: "John Smith",
+    avatar: "👨‍🦱",
+    level: 15,
+    rating: 4.9,
+    sports: ["basketball", "football"],
+    status: "online",
+    lastActive: "2 hours ago",
+    isFriend: true,
+  },
+  {
+    id: "friend-2",
+    name: "Sarah Johnson",
+    avatar: "👩‍🦰",
+    level: 11,
+    rating: 4.7,
+    sports: ["tennis", "volleyball"],
+    status: "offline",
+    lastActive: "1 day ago",
+    isFriend: true,
+  },
+  {
+    id: "friend-3",
+    name: "Mike Davis",
+    avatar: "👨‍🦱",
+    level: 13,
+    rating: 4.6,
+    sports: ["basketball", "badminton"],
+    status: "online",
+    lastActive: "now",
+    isFriend: true,
+  },
+];
+
+// export const getUserFromStorage = () => {
+//   if (typeof window !== 'undefined') {
+//     const user = localStorage.getItem('user')
+//     if (user) {
+//       const parsedUser = JSON.parse(user)
+//       return mockUsers[parsedUser.email] || parsedUser
+//     }
+//   }
+//   return null
+// }
 
 export const getUserFromStorage = () => {
   if (typeof window !== "undefined") {

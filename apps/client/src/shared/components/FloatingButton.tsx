@@ -3,9 +3,9 @@ import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 
 interface FloatingActionButtonProps {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   label?: string;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   variant?: "default" | "secondary";
 }
