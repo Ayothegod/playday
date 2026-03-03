@@ -1,3 +1,4 @@
+import { FloatingActionButton } from "@/shared/components/FloatingButton";
 import { SessionCard, type SessionData } from "@/shared/components/SessionCard";
 import { TopBar } from "@/shared/components/TopBar";
 import { Badge } from "@/shared/components/ui/badge";
@@ -26,7 +27,7 @@ type SportFilter =
 export default function DashboardPage() {
   const navigate = useNavigate();
   const [user] = useState<{ name: string; email: string } | null>(null);
-  const [loading] = useState(true);
+  const [loading] = useState(false);
   const [selectedSport, setSelectedSport] = useState<SportFilter>("all");
   const [filteredSessions] = useState<SessionData[]>([]);
 
@@ -200,10 +201,11 @@ export default function DashboardPage() {
 
       {/* Floating Action Button */}
       <Link to="/create-session">
-        <Button size={"icon-lg"} className="cursor-pointer">
-          <Plus size={24} />
-          New Game
-        </Button>
+        <FloatingActionButton
+          icon={<Plus size={24} />}
+          label="New Game"
+          onClick={() => {}}
+        />
       </Link>
     </main>
   );
