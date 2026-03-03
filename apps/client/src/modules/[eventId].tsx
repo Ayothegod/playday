@@ -11,7 +11,7 @@ import { Clock, MapPin, MessageCircle, Share2, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function SessionDetailPage() {
+export default function EventDetailPage() {
   const navigate = useNavigate();
   const params = useParams();
   const sessionId = params.id as string;

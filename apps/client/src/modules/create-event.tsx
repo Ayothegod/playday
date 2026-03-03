@@ -30,7 +30,7 @@ const sports: Sport[] = [
 ];
 const skillLevels: SkillLevel[] = ["beginner", "intermediate", "advanced"];
 
-export default function CreateSessionPage() {
+export default function CreateEventPage() {
   const navigate = useNavigate();
   // const [user, setUser] = useState<{ name: string; email: string } | null>(
   //   null,

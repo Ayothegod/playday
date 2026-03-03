@@ -14,7 +14,7 @@ import { Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function MySessionsPage() {
+export default function MyEventsPage() {
   const router = useNavigate();
   // const [user, setUser] = useState<{ name: string; email: string } | null>(
   //   null,
