@@ -1,6 +1,6 @@
 import LoginPage from "@/modules/auth/login";
 import RegisterPage from "@/modules/auth/register";
-import DashboardPage from "@/modules/dashboard";
+import DashboardPage from "@/modules/user/dashboard";
 import RootPage from "@/modules/root";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error";
