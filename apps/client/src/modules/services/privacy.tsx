@@ -13,7 +13,11 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         <Link to={fromLocation}>
-          <Button variant="ghost" size="sm" className="mb-8 gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mb-8 gap-2 cursor-pointer"
+          >
             <ArrowLeft size={18} />
             Back
           </Button>

@@ -3,7 +3,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { authClient } from "@/shared/lib/auth-client";
 import clientEnv from "@/shared/lib/clientEnv";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -29,6 +29,13 @@ export default function RegisterPage() {
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center p-4">
+      <Link to="/" className="fixed top-4 left-4">
+        <Button variant="ghost" size="sm" className="gap-2 cursor-pointer">
+          <ArrowLeft size={18} />
+          Back
+        </Button>
+      </Link>
+
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-4">
@@ -50,18 +57,8 @@ export default function RegisterPage() {
 
           <Button
             onClick={handleSignUp}
-            className="space-y-4 cursor-pointer"
             disabled={loading}
-          >
-            {loading ? "Creating account..." : "Create Account"}
-            {!loading && <ArrowRight size={18} />}
-          </Button>
-
-          <Button
-            onClick={handleSignUp}
-            disabled={loading}
-            className="w-full h-12 gap-3 mb-4 bg-white hover:bg-gray-100 text-foreground border border-border"
-            variant="outline"
+            className="w-full h-12 gap-3 mb-4 group cursor-pointer"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -82,6 +79,9 @@ export default function RegisterPage() {
               />
             </svg>
             {loading ? "Creating account..." : "Sign up with Google"}
+            {!loading && (
+              <ArrowRight size={18} className="group-hover:translate-x-1" />
+            )}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground mt-6">
