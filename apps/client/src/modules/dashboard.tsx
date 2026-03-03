@@ -1,4 +1,5 @@
 import { FloatingActionButton } from "@/shared/components/FloatingButton";
+import { AppNavigation } from "@/shared/components/Navigation";
 import { SessionCard, type SessionData } from "@/shared/components/SessionCard";
 import { TopBar } from "@/shared/components/TopBar";
 import { Badge } from "@/shared/components/ui/badge";
@@ -10,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
 // import { getUserFromStorage, mockSessions } from "@/shared/lib/mockData";
-import { Filter, LogOut, Plus, User, Zap } from "lucide-react";
+import { Filter, Plus } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -26,7 +27,7 @@ type SportFilter =
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const [user] = useState<{ name: string; email: string } | null>(null);
+  // const [user] = useState<{ name: string; email: string } | null>(null);
   const [loading] = useState(false);
   const [selectedSport, setSelectedSport] = useState<SportFilter>("all");
   const [filteredSessions] = useState<SessionData[]>([]);
@@ -53,10 +54,10 @@ export default function DashboardPage() {
   //   }
   // }, [selectedSport]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("user");
+  //   navigate("/");
+  // };
 
   const handleSessionClick = (session: SessionData) => {
     navigate(`/session/${session.id}`);
@@ -86,42 +87,7 @@ export default function DashboardPage() {
 
   return (
     <main className="bg-background min-h-screen pb-20">
-      {/* Top Bar */}
-      <TopBar
-        title="Find Games"
-        subtitle={`Welcome, ${user?.name || "Player"}`}
-        showMenu={false}
-        rightAction={
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <User size={20} />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <Link to="/profile" className="cursor-pointer">
-                  <User size={16} className="mr-2" />
-                  Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/my-sessions" className="cursor-pointer">
-                  <Zap size={16} className="mr-2" />
-                  My Sessions
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={handleLogout}
-                className="text-destructive cursor-pointer"
-              >
-                <LogOut size={16} className="mr-2" />
-                Sign Out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        }
-      />
+      <AppNavigation />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
