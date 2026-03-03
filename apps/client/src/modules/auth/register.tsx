@@ -1,3 +1,4 @@
+import AuthFooter from "@/shared/components/auth/AuthFooter";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { authClient } from "@/shared/lib/auth-client";
@@ -94,16 +95,7 @@ export default function RegisterPage() {
           </p>
         </Card>
 
-        <p className="text-center text-xs text-muted-foreground mt-6">
-          By signing up, you agree to our{" "}
-          <Link to="/terms" className="hover:text-primary">
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link to="/privacy" className="hover:text-primary">
-            Privacy Policy
-          </Link>
-        </p>
+        <AuthFooter />
       </div>
     </main>
   );

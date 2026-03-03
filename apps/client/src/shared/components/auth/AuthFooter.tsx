@@ -6,7 +6,10 @@ export default function AuthFooter() {
   return (
     <p className="text-center text-xs text-muted-foreground mt-6">
       By signing in, you agree to our{" "}
-      <Link to={`/terms/${location.pathname}`} className="hover:text-primary">
+      <Link
+        to={`/terms?from=${location.pathname}`}
+        className="hover:text-primary"
+      >
         Terms of Service
       </Link>{" "}
       and{" "}

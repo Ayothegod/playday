@@ -13,7 +13,7 @@ export default function TermsPage() {
     <main className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <Link to="/auth/login">
+        <Link to={fromLocation}>
           <Button variant="ghost" size="sm" className="mb-8 gap-2">
             <ArrowLeft size={18} />
             Back
