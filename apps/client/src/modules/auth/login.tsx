@@ -99,7 +99,7 @@ export default function LoginPage() {
               to="/auth/register"
               className="text-primary font-semibold hover:underline"
             >
-              Sign up with Google
+              Sign up
             </Link>
           </p>
         </Card>

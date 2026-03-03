@@ -13,7 +13,10 @@ export default function AuthFooter() {
         Terms of Service
       </Link>{" "}
       and{" "}
-      <Link to={`/privacy/${location.pathname}`} className="hover:text-primary">
+      <Link
+        to={`/privacy?from=${location.pathname}`}
+        className="hover:text-primary"
+      >
         Privacy Policy
       </Link>
     </p>
