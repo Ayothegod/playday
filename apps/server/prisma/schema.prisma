@@ -13,7 +13,7 @@ datasource db {
 model User {
   id            String              @id @default(cuid())
   name          String
-  sports        String // sports they play - JSON.stringify([])
+  sports        String? // sports they play - JSON.stringify([])
   skillLevel    String?             @default("begineer") // begineer, intermediate, advanced
   availablity   String? // morning, afternoon, evening
   // status Stri
