@@ -1,6 +1,7 @@
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { ArrowRight, ChevronLeft } from "lucide-react";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -28,11 +29,25 @@ const availability = [
   { id: "flexible", label: "Flexible", emoji: "⏰" },
 ];
 
-type Step = "welcome" | "sports" | "skill" | "availability" | "complete";
+// type Step = "welcome" | "sports" | "skill" | "availability" | "complete";
+const steps = [
+  "welcome",
+  "sports",
+  "skill",
+  "availability",
+  "complete",
+] as const;
 
 export default function WelcomePage() {
   const router = useNavigate();
-  const [step, setStep] = useState<Step>("welcome");
+  // const [step, setStep] = useState<Step>("welcome");
+
+  const [step, setStep] = useQueryState(
+    "step",
+    parseAsStringLiteral(steps).withDefault("welcome"),
+  );
+  console.log(step);
+
   const [selectedSports, setSelectedSports] = useState<string[]>([]);
   const [selectedSkillLevel, setSelectedSkillLevel] = useState<
     Record<string, string>
@@ -104,7 +119,11 @@ export default function WelcomePage() {
         Let's set up your profile so we can find you the perfect games and
         teammates. It only takes a few minutes.
       </p>
-      <Button onClick={() => setStep("sports")} size="lg" className="gap-2">
+      <Button
+        onClick={() => setStep("sports")}
+        size="lg"
+        className="gap-2 cursor-pointer"
+      >
         Get Started
         <ArrowRight size={20} />
       </Button>
@@ -143,7 +162,7 @@ export default function WelcomePage() {
         <Button
           variant="outline"
           onClick={() => setStep("welcome")}
-          className="gap-2"
+          className="gap-2 cursor-pointer"
         >
           <ChevronLeft size={18} />
           Back
@@ -326,14 +345,12 @@ export default function WelcomePage() {
   return (
     <main className="min-h-screen bg-background p-4 py-12">
       <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <div className="text-3xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent mb-2">
             PLAYDAY
           </div>
-        </div>
+        </div> */}
 
-        {/* Progress Indicator */}
         {step !== "welcome" && step !== "complete" && (
           <div className="mb-12">
             <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
