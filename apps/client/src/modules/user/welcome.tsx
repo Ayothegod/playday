@@ -1,45 +1,21 @@
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
+import {
+  useWelcomeState,
+  steps,
+  sports,
+  skillLevels,
+  availability,
+} from "@/shared/state/welcome";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-const sports = [
-  { id: "football", name: "Football", emoji: "🏈" },
-  { id: "basketball", name: "Basketball", emoji: "🏀" },
-  { id: "boxing", name: "Boxing", emoji: "🥊" },
-  { id: "kickboxing", name: "Kickboxing", emoji: "🥋" },
-  { id: "running", name: "Running", emoji: "🏃" },
-  { id: "fitness", name: "General Fitness", emoji: "💪" },
-  { id: "governors-walk", name: "Governor's Progressive Walk", emoji: "🚶" },
-];
-
-const skillLevels = [
-  { id: "beginner", label: "Beginner", description: "Just starting out" },
-  { id: "intermediate", label: "Intermediate", description: "Some experience" },
-  { id: "advanced", label: "Advanced", description: "Very experienced" },
-  { id: "pro", label: "Pro", description: "Competition level" },
-];
-
-const availability = [
-  { id: "weekends", label: "Weekends", emoji: "📅" },
-  { id: "weekdays-morning", label: "Weekday Mornings", emoji: "🌅" },
-  { id: "weekdays-evening", label: "Weekday Evenings", emoji: "🌆" },
-  { id: "flexible", label: "Flexible", emoji: "⏰" },
-];
-
 // type Step = "welcome" | "sports" | "skill" | "availability" | "complete";
-const steps = [
-  "welcome",
-  "sports",
-  "skill",
-  "availability",
-  "complete",
-] as const;
 
 export default function WelcomePage() {
   const router = useNavigate();
+  const { selectedSports, setSelectedSports } = useWelcomeState();
   // const [step, setStep] = useState<Step>("welcome");
 
   const [step, setStep] = useQueryState(
@@ -48,7 +24,6 @@ export default function WelcomePage() {
   );
   console.log(step);
 
-  const [selectedSports, setSelectedSports] = useState<string[]>([]);
   const [selectedSkillLevel, setSelectedSkillLevel] = useState<
     Record<string, string>
   >({});
@@ -58,11 +33,7 @@ export default function WelcomePage() {
   const [loading, setLoading] = useState(false);
 
   const handleSelectSport = (sportId: string) => {
-    setSelectedSports((prev) =>
-      prev.includes(sportId)
-        ? prev.filter((s) => s !== sportId)
-        : [...prev, sportId],
-    );
+    setSelectedSports(sportId);
   };
 
   const handleSelectAvailability = (availId: string) => {
