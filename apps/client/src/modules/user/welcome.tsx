@@ -15,7 +15,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function WelcomePage() {
   const router = useNavigate();
-  const { selectedSports, setSelectedSports } = useWelcomeState();
+  const {
+    selectedSports,
+    setSelectedSports,
+    selectedAvailability,
+    setSelectedAvailability,
+  } = useWelcomeState();
   // const [step, setStep] = useState<Step>("welcome");
 
   const [step, setStep] = useQueryState(
@@ -27,9 +32,6 @@ export default function WelcomePage() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState<
     Record<string, string>
   >({});
-  const [selectedAvailability, setSelectedAvailability] = useState<string[]>(
-    [],
-  );
   const [loading, setLoading] = useState(false);
 
   const handleSelectSport = (sportId: string) => {
@@ -37,11 +39,7 @@ export default function WelcomePage() {
   };
 
   const handleSelectAvailability = (availId: string) => {
-    setSelectedAvailability((prev) =>
-      prev.includes(availId)
-        ? prev.filter((a) => a !== availId)
-        : [...prev, availId],
-    );
+    setSelectedAvailability(availId);
   };
 
   const handleSkillLevelSelect = (sportId: string, skillId: string) => {

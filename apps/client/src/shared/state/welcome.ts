@@ -37,7 +37,7 @@ interface WelcomeState {
   selectedSports: string[];
   setSelectedSports: (sportId: string) => void;
   selectedAvailability: string[];
-  setSelectedAvailability: () => void;
+  setSelectedAvailability: (availId: string) => void;
   selectedSkillLevel: Record<string, string>;
   setSelectedSkillLevel: () => void;
 
@@ -60,7 +60,13 @@ export const useWelcomeState = create<WelcomeState>()(
           : [...sports, sportId];
         set({ selectedSports: updateSports });
       },
-      setSelectedAvailability: () => set({}),
+      setSelectedAvailability: (availId) => {
+        const availability = get().selectedAvailability;
+        const updateAvailability = availability.includes(availId)
+          ? availability.filter((s) => s !== availId)
+          : [...availability, availId];
+        set({ selectedAvailability: updateAvailability });
+      },
       setSelectedSkillLevel: () => set({}),
     }),
     { name: "t7est", storage: createJSONStorage(() => localStorage) },
