@@ -39,7 +39,7 @@ interface WelcomeState {
   selectedAvailability: string[];
   setSelectedAvailability: (availId: string) => void;
   selectedSkillLevel: Record<string, string>;
-  setSelectedSkillLevel: () => void;
+  setSelectedSkillLevel: (sportId: string, skillId: string) => void;
 
   loading: boolean;
   setLoading: () => void;
@@ -67,7 +67,11 @@ export const useWelcomeState = create<WelcomeState>()(
           : [...availability, availId];
         set({ selectedAvailability: updateAvailability });
       },
-      setSelectedSkillLevel: () => set({}),
+      setSelectedSkillLevel: (sportId, skillId) => {
+        const skillLevel = get().selectedSkillLevel;
+
+        set({ selectedSkillLevel: { ...skillLevel, [sportId]: skillId } });
+      },
     }),
     { name: "t7est", storage: createJSONStorage(() => localStorage) },
   ),

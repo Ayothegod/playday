@@ -20,6 +20,8 @@ export default function WelcomePage() {
     setSelectedSports,
     selectedAvailability,
     setSelectedAvailability,
+    selectedSkillLevel,
+    setSelectedSkillLevel,
   } = useWelcomeState();
   // const [step, setStep] = useState<Step>("welcome");
 
@@ -29,9 +31,6 @@ export default function WelcomePage() {
   );
   console.log(step);
 
-  const [selectedSkillLevel, setSelectedSkillLevel] = useState<
-    Record<string, string>
-  >({});
   const [loading, setLoading] = useState(false);
 
   const handleSelectSport = (sportId: string) => {
@@ -43,10 +42,7 @@ export default function WelcomePage() {
   };
 
   const handleSkillLevelSelect = (sportId: string, skillId: string) => {
-    setSelectedSkillLevel((prev) => ({
-      ...prev,
-      [sportId]: skillId,
-    }));
+    setSelectedSkillLevel(sportId, skillId);
   };
 
   const handleComplete = async () => {
