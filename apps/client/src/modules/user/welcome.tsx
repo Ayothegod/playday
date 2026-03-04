@@ -1,17 +1,15 @@
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import {
-  useWelcomeState,
-  steps,
-  sports,
-  skillLevels,
   availability,
+  skillLevels,
+  sports,
+  steps,
+  useWelcomeState,
 } from "@/shared/state/welcome";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// type Step = "welcome" | "sports" | "skill" | "availability" | "complete";
 
 export default function WelcomePage() {
   const router = useNavigate();
@@ -22,6 +20,7 @@ export default function WelcomePage() {
     setSelectedAvailability,
     selectedSkillLevel,
     setSelectedSkillLevel,
+    loading,
   } = useWelcomeState();
   // const [step, setStep] = useState<Step>("welcome");
 
@@ -30,8 +29,6 @@ export default function WelcomePage() {
     parseAsStringLiteral(steps).withDefault("welcome"),
   );
   console.log(step);
-
-  const [loading, setLoading] = useState(false);
 
   const handleSelectSport = (sportId: string) => {
     setSelectedSports(sportId);
@@ -46,30 +43,30 @@ export default function WelcomePage() {
   };
 
   const handleComplete = async () => {
-    setLoading(true);
-    try {
-      // Save onboarding data
-      const user = localStorage.getItem("user");
-      if (user) {
-        const userData = JSON.parse(user);
-        const updatedUser = {
-          ...userData,
-          sports: selectedSports,
-          skillLevels: selectedSkillLevel,
-          availability: selectedAvailability,
-          onboardingComplete: true,
-        };
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-      }
+    // setLoading(true);
+    // try {
+    //   // Save onboarding data
+    //   const user = localStorage.getItem("user");
+    //   if (user) {
+    //     const userData = JSON.parse(user);
+    //     const updatedUser = {
+    //       ...userData,
+    //       sports: selectedSports,
+    //       skillLevels: selectedSkillLevel,
+    //       availability: selectedAvailability,
+    //       onboardingComplete: true,
+    //     };
+    //     localStorage.setItem("user", JSON.stringify(updatedUser));
+    //   }
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      router("/dashboard");
-    } catch (err) {
-      console.error("Error completing onboarding:", err);
-    } finally {
-      setLoading(false);
-    }
+    //   // Simulate API call
+    //   await new Promise((resolve) => setTimeout(resolve, 500));
+    router("/dashboard");
+    // } catch (err) {
+    //   console.error("Error completing onboarding:", err);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   const renderWelcomeStep = () => (
