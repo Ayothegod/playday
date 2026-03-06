@@ -4,7 +4,9 @@ import express, { Response, Request } from "express";
 import { ApiResponse } from "./core/middlewares/ApiResponse.js";
 import { asyncHandler } from "./core/middlewares/asyncHandler.js";
 import { errorHandler } from "./core/middlewares/error.middleware.js";
-import authRoute from "./modules/auth/auth.routes.js";
+import profileRoute from "./modules/profile/profile.routes.js";
+import eventsRoute from "./modules/event/event.routes.js";
+
 import { toNodeHandler } from "better-auth/node";
 import auth from "./core/config/auth.js";
 
@@ -33,7 +35,8 @@ app.get(
   }),
 );
 
-app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/profile", profileRoute);
+app.use("/api/v1/events", eventsRoute);
 
 app.use(errorHandler as any);
 
