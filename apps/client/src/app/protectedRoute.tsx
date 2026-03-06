@@ -14,6 +14,7 @@ export default function ProtectedRoute({
     error,
     // refetch,
   } = authClient.useSession();
+  // console.log({ session });
 
   if (isPending) return <Loading />;
 

@@ -73,6 +73,6 @@ export const useWelcomeState = create<WelcomeState>()(
         set({ selectedSkillLevel: { ...skillLevel, [sportId]: skillId } });
       },
     }),
-    { name: "t7est", storage: createJSONStorage(() => localStorage) },
+    { name: "onboard-data", storage: createJSONStorage(() => localStorage) },
   ),
 );

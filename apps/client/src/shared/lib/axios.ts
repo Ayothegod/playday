@@ -4,7 +4,7 @@ import type { AxiosErrorResponse } from "./types";
 import clientEnv from "./clientEnv";
 
 const api = axios.create({
-  baseURL: clientEnv.VITE_API_URL,
+  baseURL: `${clientEnv.VITE_API_URL}/api/v1`,
   headers: {
     "Content-Type": "application/json",
   },

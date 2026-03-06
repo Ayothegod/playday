@@ -1,5 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
+import { onboardReq } from "@/shared/lib/fetch";
 import {
   availability,
   skillLevels,
@@ -29,7 +30,6 @@ export default function WelcomePage() {
     "step",
     parseAsStringLiteral(steps).withDefault("welcome"),
   );
-  console.log(step);
 
   const handleSelectSport = (sportId: string) => {
     setSelectedSports(sportId);
@@ -45,29 +45,15 @@ export default function WelcomePage() {
 
   const handleComplete = async () => {
     setLoading();
-    try {
-      console.log("STart handle complete");
 
-      //   // Save onboarding data
-      //   const user = localStorage.getItem("user");
-      //   if (user) {
-      //     const userData = JSON.parse(user);
-      //     const updatedUser = {
-      //       ...userData,
-      //       sports: selectedSports,
-      //       skillLevels: selectedSkillLevel,
-      //       availability: selectedAvailability,
-      //       onboardingComplete: true,
-      //     };
-      //     localStorage.setItem("user", JSON.stringify(updatedUser));
-      //   }
-      // const res = await onboardReq(
-      //   selectedSports,
-      //   selectedSkillLevel,
-      //   selectedAvailability,
-      // );
-      //   // Simulate API call
-      //   await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      const response = await onboardReq(
+        selectedSports,
+        selectedSkillLevel,
+        selectedAvailability,
+      );
+
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
       // router("/dashboard");
     } catch (err) {
       console.error("Error completing onboarding:", err);
