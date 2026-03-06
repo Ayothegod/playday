@@ -8,14 +8,12 @@ export interface AxiosErrorResponse extends CustomAxiosErrorResponse {
   stack: null;
 }
 
-// interface BaseAPIResponse {
-//   message: string;
-//   statusCode: number;
-//   success?: boolean;
-// }
+interface BaseAPIResponse {
+  message: string;
+  statusCode: number;
+  success?: boolean;
+}
 
-// export interface GetMeResponse extends BaseAPIResponse {
-//   data: {
-//     user: User;
-//   };
-// }
+export interface OnboardResponse extends BaseAPIResponse {
+  data: null;
+}
