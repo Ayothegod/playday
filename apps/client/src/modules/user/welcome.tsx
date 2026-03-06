@@ -11,6 +11,7 @@ import {
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function WelcomePage() {
   // const router = useNavigate();
@@ -52,11 +53,12 @@ export default function WelcomePage() {
         selectedSkillLevel,
         selectedAvailability,
       );
+      console.log({ response });
 
       // await new Promise((resolve) => setTimeout(resolve, 5000));
       // router("/dashboard");
     } catch (err) {
-      console.error("Error completing onboarding:", err);
+      toast.error(err.message ?? "Error while completing onboarding");
     } finally {
       setLoading();
     }

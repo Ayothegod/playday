@@ -1,19 +1,17 @@
+import { ApiError } from "@/core/errors/ApiError";
 import { ApiResponse } from "@/core/middlewares/ApiResponse";
 import { Request, Response } from "express";
+import ProfileService from "./profile.service";
 
 class ProfileController {
   static async onboard(req: Request, res: Response) {
-    // const { email, password } = req.body;
-    console.log({ body: req.body });
+    const { selectedSports, selectedSkillLevel, selectedAvailability } =
+      req.body;
+    console.log(req.body);
+    // await ProfileService.onboard(res, email, password);
 
     res.status(201).json(new ApiResponse(201, {}, "User onboard success"));
   }
-
-  // static async login(req: Request, res: Response) {
-  //   const { email, password } = req.body;
-  //   await AuthService.login(res, email, password);
-  //   res.status(200).json(new ApiResponse(200, {}, "User log-in successful."));
-  // }
 }
 
 export default ProfileController;

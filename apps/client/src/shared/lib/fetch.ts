@@ -6,7 +6,9 @@ export const onboardReq = (
   selectedSkillLevel: Record<string, string>,
   selectedAvailability: string[],
 ) => {
-  return api.get<OnboardResponse>("/onboard", {
-    data: { selectedSports, selectedSkillLevel, selectedAvailability },
+  return api.post<OnboardResponse>("/profile/onboard", {
+    selectedSports,
+    selectedSkillLevel,
+    selectedAvailability,
   });
 };
